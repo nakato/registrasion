@@ -1,6 +1,4 @@
 import datetime
-import sys
-from registrasion import util
 import zipfile
 
 from registrasion import forms
@@ -926,13 +924,14 @@ Email = namedtuple(
     ("subject", "body", "from_email", "recipient_list"),
 )
 
+
 @user_passes_test(_staff_only)
 def invoice_mailout(request):
     ''' Allows staff to send emails to users based on their invoice status. '''
 
     category = request.GET.getlist("category", [])
-    product  = request.GET.getlist("product", [])
-    status  = request.GET.get("status")
+    product = request.GET.getlist("product", [])
+    status = request.GET.get("status")
 
     form = forms.InvoiceEmailForm(
         request.POST or None,
@@ -951,8 +950,8 @@ def invoice_mailout(request):
             subject = form.cleaned_data["subject"]
             body = Template(form.cleaned_data["body"]).render(
                 Context({
-                    "invoice" : invoice,
-                    "user" : invoice.user,
+                    "invoice": invoice,
+                    "user": invoice.user,
                 })
             )
             recipient_list = [invoice.user.email]
@@ -991,8 +990,8 @@ def badges(request):
     render, or returns a .zip file containing their badges. '''
 
     category = request.GET.getlist("category", [])
-    product  = request.GET.getlist("product", [])
-    status  = request.GET.get("status")
+    product = request.GET.getlist("product", [])
+    status = request.GET.get("status")
 
     form = forms.InvoicesWithProductAndStatusForm(
         request.POST or None,
