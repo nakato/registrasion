@@ -67,7 +67,7 @@ class SpeakerTestCase(RegistrationCartTestCase):
             kind=kind_1,
             title="Proposal 1",
             abstract="Abstract",
-            description="Description",
+            private_abstract="Private Abstract",
             speaker=speaker_1,
         )
         proposal_models.AdditionalSpeaker.objects.create(
@@ -80,7 +80,7 @@ class SpeakerTestCase(RegistrationCartTestCase):
             kind=kind_2,
             title="Proposal 2",
             abstract="Abstract",
-            description="Description",
+            private_abstract="Private Abstract",
             speaker=speaker_1,
         )
         proposal_models.AdditionalSpeaker.objects.create(

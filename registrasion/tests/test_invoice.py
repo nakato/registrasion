@@ -98,7 +98,11 @@ class InvoiceTestCase(TestHelperMixin, RegistrationCartTestCase):
 
     def test_total_payments_balance_due(self):
         invoice = self._invoice_containing_prod_1(2)
-        for i in xrange(0, invoice.invoice.value):
+        # range only takes int, and the following logic fails if not a round
+        # number.  So fail if we are not a round number so developer may fix
+        # this test or the product.
+        self.assertTrue((invoice.invoice.value % 1).is_zero())
+        for i in range(0, int(invoice.invoice.value)):
             self.assertTrue(
                 i + 1, invoice.invoice.total_payments()
             )

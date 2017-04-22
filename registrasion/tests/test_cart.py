@@ -85,7 +85,7 @@ class RegistrationCartTestCase(MixInPatches, TestCase):
             prod = inventory.Product.objects.create(
                 name="Product " + str(i + 1),
                 description="This is a test product.",
-                category=cls.categories[i / 2],  # 2 products per category
+                category=cls.categories[int(i / 2)],  # 2 products per category
                 price=Decimal("10.00"),
                 reservation_duration=cls.RESERVATION,
                 limit_per_user=10,
