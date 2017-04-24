@@ -8,6 +8,8 @@ from django.db.models import Q
 
 class ApplyCreditNoteForm(forms.Form):
 
+    required_css_class = 'label-required'
+
     def __init__(self, user, *a, **k):
         ''' User: The user whose invoices should be made available as
         choices. '''
@@ -51,6 +53,8 @@ class ApplyCreditNoteForm(forms.Form):
 
 class CancellationFeeForm(forms.Form):
 
+    required_css_class = 'label-required'
+
     percentage = forms.DecimalField(
         required=True,
         min_value=0,
@@ -60,12 +64,16 @@ class CancellationFeeForm(forms.Form):
 
 class ManualCreditNoteRefundForm(forms.ModelForm):
 
+    required_css_class = 'label-required'
+
     class Meta:
         model = commerce.ManualCreditNoteRefund
         fields = ["reference"]
 
 
 class ManualPaymentForm(forms.ModelForm):
+
+    required_css_class = 'label-required'
 
     class Meta:
         model = commerce.ManualPayment
@@ -150,6 +158,9 @@ class _HasProductsFields(object):
 
 
 class _ProductsForm(_HasProductsFields, forms.Form):
+
+    required_css_class = 'label-required'
+
     pass
 
 
@@ -312,6 +323,8 @@ class _ItemQuantityProductsForm(_ProductsForm):
 
 class _ItemQuantityProductsFormSet(_HasProductsFields, forms.BaseFormSet):
 
+    required_css_class = 'label-required'
+
     @classmethod
     def set_fields(cls, category, products):
         raise ValueError("set_fields must be called on the underlying Form")
@@ -377,6 +390,9 @@ class _ItemQuantityProductsFormSet(_HasProductsFields, forms.BaseFormSet):
 
 
 class VoucherForm(forms.Form):
+
+    required_css_class = 'label-required'
+
     voucher = forms.CharField(
         label="Voucher code",
         help_text="If you have a voucher code, enter it here",
@@ -416,6 +432,9 @@ def staff_products_formset_factory(user):
 
 
 class InvoicesWithProductAndStatusForm(forms.Form):
+
+    required_css_class = 'label-required'
+
     invoice = forms.ModelMultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,
         queryset=commerce.Invoice.objects.all(),
